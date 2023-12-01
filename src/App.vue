@@ -209,6 +209,28 @@ onMounted(() => {
     //   tween.kill(); //metodo per eliminare un tween
     // }, 2000);
   });
+
+  // METODI SALVA VITA
+  //un altro modo per capire se è attiva è usare isActive, per fare questo devo salvare il tween in una variabile
+  const tween = gsap.to(".salvavita-square", {
+    id: "salvavita-square", //possiamo specificare un id per poi fare il target, vedi sotto
+    duration: 5,
+    ease: "sine.out",
+    x: 500,
+    backgroundColor: "#ff9922",
+  });
+
+  document.querySelector(".salvavita").addEventListener("click", () => {
+    //console.log(gsap.isTweening(".salvavita-square")); //metodo per vedere se un elemento del dom si sta animando
+    console.log(tween.isActive()); // leggi sopra, true se avviene false se in pausa o terminata
+    //come cancellare e eliminare un tween oltre che con tween.kill() gia visto sopra?
+    // gsap.killTweensOf(".salvavita-square", "backgroundColor,ease"); //possiamo passargli uno o piu tweens da eliminare, possiamo passare una seconda stringa con tuttte le proprietà che vogliamo eliminare separandole con una virgola
+    // tween.kill(".active", "backgroundColor,x"); // anche lui accetta 2 parametri, 1)elementi che verrano tolti dal tween, di default avviene su tutti i target 2) specificare le proprieta da eliminare altrimenti di default le elimina tutte
+    //come recuperare i tween dei nostri elementi? il modo piu semplice per avere il riferimento di un tween è andare a salvarlo in una variabile
+    // const tweens = gsap.getTweensOf(".salvavita-square");// fornisce i tween degli elementi target
+    const squareTween = gsap.getById("salvavita-square"); // non possiamo recuperare i tween quando l'animazione è stata comletata
+    console.log(squareTween);
+  });
 });
 </script>
 
@@ -230,6 +252,17 @@ onMounted(() => {
       class="mostra bg-blue-500 hover:bg-blue-200 text-white py-1 px-2 m-2 rounded-md"
     >
       mostra header
+    </button>
+  </div>
+  <div class="salvavita-square w-12 h-12 rounded-md bg-violet-300 ml-5"></div>
+  <div
+    class="salvavita-square active w-12 h-12 rounded-md bg-blue-300 ml-5 mt-3"
+  ></div>
+  <div class="p-10">
+    <button
+      class="salvavita bg-blue-500 hover:bg-blue-200 text-white py-1 px-2 m-2 rounded-md"
+    >
+      salvavita
     </button>
   </div>
   <!-- callback -->

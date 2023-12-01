@@ -165,11 +165,56 @@ onMounted(() => {
       // repeatRefresh: true, // con lui true Rigenera l'animazione prima di ogni iterazione, garantendo continuità.
     });
   });
+
+  // CALLBACK funzione a tutti gli effetti che viene chiamata allo scatenarsi di un evento nei nostri tween e timeline. ad esempio possiamo evocare le f quando l'animazione comincia, finisce o in un momento specifico o anche ad ogni ripetizione se utilizzo repeat
+  function onComplete(param1, param2) {
+    console.log("completa", param1 + param2);
+  }
+  document.querySelector(".callback").addEventListener("click", () => {
+    const tween = gsap.to(".callback-square", {
+      duration: 2,
+      x: 200,
+      borderRadius: "100",
+      repeat: 3, //per vedere onRepeat
+      onRepeat: () => {
+        // onRepeatParams per mandare parametri
+        console.log("ripetuta");
+      },
+      // onReverseComplete(){//altro modo di chiamare una callback senza arrow function ma direttamente dalla funzone gsap
+      //   //viene chiamata quando viene completato il reverse di una funzione
+      // }
+      //paused: true, //tween creato ma in pausa
+      // onStart: () => {
+      //   // quando inizia l'animazione, non quando viene creato il tween ad esempio in questo caso ho aggiunto un paused sopra
+      //   //se devo passare params onCompleteParams
+      //   console.log("inizia");
+      // },
+      // onComplete: onComplete, // qunado la animazione è finita, non viene invocata se il tween si ferma prima del completamento animazione.
+      // onCompleteParams: [5, 10], //serve per passare dati alla funzione
+      // // onComplete:()=>{
+      // //   console.log('completa');
+      // // },//possiamo passargli una function(),una arrov function o possiamo creare una funzione onComplete() esterna da richiamare. forse ha piu senso arrow function per il this
+      // onInterrupt: () => {
+      //   // chiama una funzione quando lanimazione viene interrotta
+      //   //se devo passare params onInterruptParams
+      //   console.log("interrotta");
+      // },
+      // onUpdate: () => {
+      //   //invocata ad ogni aggiornamento della nostra animazione, anche qui cè onUpdateParams
+      //   console.log("update");
+      // },
+    });
+    // setTimeout(() => {
+    //   //timer per testare onINterrupt
+    //   tween.kill(); //metodo per eliminare un tween
+    // }, 2000);
+  });
 });
 </script>
 
 <template>
   <h1 class="text-center bg-slate-200">Hello GSAP</h1>
+  <!-- stagger -->
   <header>
     <nav class="container">
       <ul class="flex py-4 justify-end">
@@ -187,7 +232,16 @@ onMounted(() => {
       mostra header
     </button>
   </div>
-
+  <!-- callback -->
+  <div class="callback-square w-12 h-12 rounded-md bg-sky-300 ml-5"></div>
+  <div class="p-10">
+    <button
+      class="callback bg-blue-500 hover:bg-blue-200 text-white py-1 px-2 m-2 rounded-md"
+    >
+      callback
+    </button>
+  </div>
+  <!-- stagger -->
   <div class="container">
     <ul class="flex py-4 justify-between w-full text-center">
       <li class="cerchio h-8 w-8 rounded-full bg-green-100"></li>
@@ -212,7 +266,7 @@ onMounted(() => {
       anima
     </button>
   </div>
-
+  <!-- repeat  -->
   <div class="flex justify-center">
     <div class="square-repeat bg-green-300 h-16 w-16"></div>
   </div>

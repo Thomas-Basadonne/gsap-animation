@@ -2,7 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
-.square{
+.square {
   height: 200px;
   width: 200px;
+}
+.rect {
+  height: 200px;
+  width: 400px;
+}
+.circle {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+}
+.square-f {
+  height: 200px;
+  width: 200px;
+}
+.rect-f {
+  height: 200px;
+  width: 400px;
+}
+.circle-f {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+}
+.square-ft {
+  height: 200px;
+  width: 200px;
+}
+.rect-ft {
+  height: 200px;
+  width: 400px;
+}
+.circle-ft {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+}
+.square-time {
+  height: 200px;
+  width: 200px;
+}
+.rect-time {
+  height: 200px;
+  width: 400px;
+}
+.circle-time {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
 }
